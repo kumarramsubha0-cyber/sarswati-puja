@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saraswati Puja Collection – iPhone</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lottie-web@5.12.2/build/player/lottie.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background:#111;display:flex;justify-content:center;align-items:center;min-height:100vh}
+.iphone{width:390px;height:780px;background:#000;border-radius:45px;overflow:hidden;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.6)}
+.notch{width:180px;height:30px;background:#000;border-radius:0 0 20px 20px;position:absolute;top:0;left:50%;transform:translateX(-50%);z-index:10}
+.status-bar{position:absolute;top:8px;left:0;width:100%;padding:0 22px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#fff;z-index:20}
+.status-icons{display:flex;gap:6px;align-items:center}
+.home-indicator{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:120px;height:5px;background:#fff;border-radius:3px;opacity:.85;z-index:20}
+.screen{padding:60px 18px;color:#fff;height:100%;overflow-y:auto}
+h1{text-align:center;font-size:26px;margin-bottom:14px;animation:fade 1.2s}
+.rect{background:linear-gradient(135deg,#ff9800,#ff5722);padding:14px;border-radius:18px;text-align:center;margin:12px 0;font-weight:600;box-shadow:0 8px 20px rgba(0,0,0,.5);transform:perspective(600px) rotateX(6deg)}
+.rect.blue{background:linear-gradient(135deg,#2196f3,#673ab7)}
+.rect.green{background:linear-gradient(135deg,#4caf50,#009688)}
+.rect.gray{background:#2c2c2c}
+.button{cursor:pointer}
+input{width:100%;padding:14px;border-radius:14px;border:none;margin:10px 0}
+.hidden{display:none}
+.invite-img{width:100%;border-radius:18px;margin:12px 0}
+@keyframes fade{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="iphone">
+<div class="notch"></div>
+<div class="status-bar">
+  <div>9:41</div>
+  <div class="status-icons">📶 📡 🔋</div>
+</div>
+<div class="screen">
+
+<!-- PAGE 1 -->
+<div id="p1">
+<div id="l1" style="height:110px"></div>
+<h1>Jay Maa Saraswati</h1>
+<div class="rect">Saraswati Puja Collection</div>
+<div class="rect blue">Check for Invitation Card</div>
+<div class="rect green button" onclick="go('p2')">Click</div>
+</div>
+
+<!-- PAGE 2 -->
+<div id="p2" class="hidden">
+<div id="l2" style="height:90px"></div>
+<h1>Invitation Card</h1>
+<img src="photo.jpg" class="invite-img" alt="Invitation">
+<div class="rect green button" onclick="go('p3')">Make a Payment</div>
+</div>
+
+<!-- PAGE 3 -->
+<div id="p3" class="hidden">
+<div id="l3" style="height:90px"></div>
+<h1>Saraswati Puja Collection</h1>
+<input id="uname" placeholder="Enter Name">
+<input id="amt" type="number" placeholder="Enter Amount (250-5000)">
+<div class="rect green button" onclick="pay()">Make a Payment</div>
+</div>
+
+<!-- PAGE 4 -->
+<div id="p4" class="hidden">
+<div id="l4" style="height:100px"></div>
+<h1>Payment Successful</h1>
+<div id="receipt" class="rect gray"></div>
+<div class="rect blue button" onclick="window.print()">Print Receipt</div>
+<div class="rect green button" onclick="share()">Share Receipt</div>
+</div>
+
+<div class="home-indicator"></div>
+</div>
+</div>
+<script>
+function go(id){document.querySelectorAll('.screen>div').forEach(d=>d.classList.add('hidden'));document.getElementById(id).classList.remove('hidden')}
+function pay(){let n=uname.value;let a=parseInt(amt.value);if(!n||a<250||a>5000){alert('Amount 250-5000 only');return}window.open(`https://www.upi.me/pay?pa=9471418396@ptyes&tn=saraswati&am=${a}`,'_blank');receipt.innerHTML=`<b>Saraswati Puja Collection</b><br>Organised by Student for Mukesh Apartment<br><br>Name: ${n}<br>Amount: ₹${a}<br><br><b>Thanks for Donation</b>`;go('p4')}
+function share(){navigator.share?navigator.share({title:'Donation Receipt',text:receipt.innerText}):alert('Share not supported')}
+lottie.loadAnimation({container:l1,renderer:'svg',loop:true,autoplay:true,path:'https://assets1.lottiefiles.com/packages/lf20_jcikwtux.json'});
+lottie.loadAnimation({container:l2,renderer:'svg',loop:true,autoplay:true,path:'https://assets1.lottiefiles.com/packages/lf20_touohxv0.json'});
+lottie.loadAnimation({container:l3,renderer:'svg',loop:true,autoplay:true,path:'https://assets2.lottiefiles.com/packages/lf20_q5pk6p1k.json'});
+lottie.loadAnimation({container:l4,renderer:'svg',loop:true,autoplay:true,path:'https://assets9.lottiefiles.com/packages/lf20_xlkxtmul.json'});
+</script>
+</body>
+</html>
